@@ -61,11 +61,13 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->lectivo.' - '.$reg->nivel.' - '.$reg->grado,
+                "0" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
                 "1" => $reg->alumno,
                 "2" => $reg->apoderado,
-                "3" => 'Nº '.$reg->numeracion,
-                "4" => '<a class="btn btn-info btn-sm" href="Reporte.php?id=' . $reg->id . '" role="button">INFO</a> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
+                "3" => '<div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="btn btn-warning btn-sm" href="Reporte.php?id=' . $reg->id . '" role="button">INFO</a>
+                            <button type="button" class="btn btn-warning btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>
+                        </div>'
             );
         }
 

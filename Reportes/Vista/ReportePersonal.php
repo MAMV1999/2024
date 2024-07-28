@@ -8,9 +8,9 @@ class PDF extends FPDF
     function Header()
     {
         // Título
-        $this->SetFont('Arial', 'B', 20);
-        $this->Cell(0, 9, utf8_decode('RECIBO DE PAGO'), 0, 1, 'C');
-        $this->Ln(2);
+        // $this->SetFont('Arial', 'B', 20);
+        // $this->Cell(0, 9, utf8_decode('RECIBO DE PAGO'), 0, 1, 'C');
+        // $this->Ln(2);
     }
 
     // Pie de página
@@ -53,21 +53,24 @@ class PDF extends FPDF
         $this->AddPage();
 
         // Encabezado con información del colegio
+        $this->SetFont('Arial', 'B', 25);
+        $this->Cell(0, 9, utf8_decode($data['institucion_nombre']), 0, 1, 'C');
+        $this->SetFont('Arial', 'B', 16);
+        $this->Cell(0, 9, utf8_decode('N.º RECIBO ' . $data['numeracion']), 0, 1, 'C');
         $this->SetFont('Arial', '', 11);
-        $this->Cell(0, 5, utf8_decode('CAL. LOS PENSAMIENTOS 261 P.J. EL ERMITAÑO'), 0, 1, 'C');
-        $this->Cell(0, 5, utf8_decode('INDEPENDENCIA - LIMA - LIMA'), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode($data['institucion_direccion']), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode('CORREO: '.$data['institucion_correo']), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode('TELEFONO: '.$data['institucion_telefono']), 0, 1, 'C');
         $this->Ln(5);
 
-        $this->SetFont('Arial', 'B', 12);
+        $this->SetFont('Arial', 'B', 13);
         $this->Cell(0, 7, utf8_decode('MATRÍCULA ' . $data['lectivo']), 0, 1, 'C');
-        $this->SetFont('Arial', 'B', 14);
-        $this->Cell(0, 7, utf8_decode('N.º RECIBO ' . $data['numeracion']), 0, 1, 'C');
+        $this->Cell(0, 7, utf8_decode($data['lectivo'].' / '.$data['nivel'].' / '.$data['grado']), 0, 1, 'C');
         $this->Ln(5);
 
         // Datos generales
         $this->SectionTitle('MATRÍCULA');
-        $this->SectionData('NIVEL', $data['nivel']);
-        $this->SectionData('GRADO', $data['grado']);
+        $this->SectionData('MATRICULADO', $data['nivel'].' / '.$data['grado']);
         $this->SectionData('TIPO DE ALUMNO', $data['razon']);
         $this->Ln(5);
 
@@ -87,6 +90,7 @@ class PDF extends FPDF
 
         // Datos del pago
         $this->SectionTitle('PAGO');
+        $this->SectionData('Nº RECIBO', $data['numeracion']);
         $this->SectionData('FECHA', $data['fecha']);
         $this->SectionData('MONTO', 'S/. '.$data['monto'].' - '.$data['metodo']);
         $this->SectionData('OBSERVACIONES', $data['observaciones']);

@@ -72,7 +72,7 @@ switch ($_GET["op"]) {
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">CERRAR</button>
                                     <button type="button" class="btn btn-warning btn-sm" data-bs-dismiss="modal" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
-                                    <a class="btn btn-info btn-sm" href="#" role="button">RECIBO PDF</a>
+                                    <a class="btn btn-info btn-sm" href="../../Reportes/Vista/ReportePersonal.php?id=' . $reg->id . '" role="button">RECIBO PDF</a>
                                 </div>
                             </div>
                         </div>
