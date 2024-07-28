@@ -65,6 +65,7 @@ function mostrar(id) {
 
                 html += '<tr>';
                 html += '<td>' + numero + '</td>';
+                html += '<td>' + documento.detalle + '</td>';
                 html += '<td>' + documento.nombre + '</td>';
                 html += '<td>' + importante + '</td>';
                 html += '<td>';

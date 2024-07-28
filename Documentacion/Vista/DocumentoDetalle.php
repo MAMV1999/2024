@@ -61,6 +61,7 @@ if (!isset($_SESSION['nombre'])) {
                         <thead>
                             <tr>
                                 <th>Nº</th>
+                                <th>DETALLE</th>
                                 <th>DOCUMENTOS</th>
                                 <th>***</th>
                                 <th>ENTREGADO (SI / NO)</th>
