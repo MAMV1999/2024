@@ -72,7 +72,7 @@ function mostrar(id) {
                 html += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="custom-radio"><input type="radio" name="documentos[' + documento.id + '][entregado]" value="SI"' + (detalle.entregado === 'SI' ? ' checked' : '') + '> Sí</label>';
                 html += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="custom-radio"><input type="radio" name="documentos[' + documento.id + '][entregado]" value="NO"' + (detalle.entregado === 'NO' ? ' checked' : '') + '> No</label>';
                 html += '</td>';
-                html += '<td><input type="text" name="documentos[' + documento.id + '][observaciones]" value="' + (detalle.observaciones || '') + '" class="form-control"></td>';
+                html += '<td><input type="text" name="documentos[' + documento.id + '][observaciones]" value="' + (detalle.observaciones || '') + '" class="form-control" placeholder="Observaciones"></td>';
                 html += '</tr>';
                 numero++;
             }
