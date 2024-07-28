@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-07-2024 a las 09:41:29
+-- Tiempo de generación: 28-07-2024 a las 07:07:08
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -114,6 +114,56 @@ INSERT INTO `apoderado` (`id`, `usuario`, `contraseña`, `dni`, `nombreyapellido
 (17, '71386363', '71386363', '71386363', 'ALEXANDRA PERAMAS PUELLES', '943446491', '', '2024-07-27 06:36:52', '1'),
 (18, '43046327', '43046327', '43046327', 'MIRIAM MARIBEL PALOMINO COSTILLA', '934413015', '', '2024-07-27 06:40:43', '1'),
 (19, '42817048', '42817048', '42817048', 'MARIA ELENA TITO QUISPE', '984034603', '', '2024-07-27 06:45:26', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `documento`
+--
+
+CREATE TABLE `documento` (
+  `id` int(11) NOT NULL,
+  `detalle` text NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `obligatorio` enum('SI','NO') NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('0','1') DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `documento`
+--
+
+INSERT INTO `documento` (`id`, `detalle`, `nombre`, `obligatorio`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'C.P.', 'FICHA ÚNICA DE MATRICULA', 'SI', '', '2024-07-28 04:24:21', '1'),
+(2, 'C.P.', 'CONSTANCIA DE MATRICULA', 'SI', '', '2024-07-28 04:26:00', '1'),
+(3, 'C.P.', 'CERTIFICADO DE ESTUDIOS', 'NO', '', '2024-07-28 04:26:15', '1'),
+(4, 'C.P.', 'INFORME DE PROGRESO / LIBRETA DE NOTAS', 'NO', '', '2024-07-28 04:26:29', '1'),
+(5, 'C.P.', 'CONSTANCIA DE NO ADEUDO', 'SI', '', '2024-07-28 04:26:48', '1'),
+(6, 'C.P.', 'RESOLUCIÓN DIRECTORAL', 'NO', '', '2024-07-28 04:27:09', '1'),
+(7, 'AP.', 'CARNE DE VACUNACIÓN (NIÑO SANO / COVID)', 'NO', '', '2024-07-28 04:27:26', '1'),
+(8, 'AP.', 'PARTIDA / ACTA DE NACIMIENTO', 'NO', '', '2024-07-28 04:28:06', '1'),
+(9, 'AP.', 'COPIA DNI ALUMNO', 'SI', '', '2024-07-28 04:28:19', '1'),
+(10, 'AP.', 'COPIA DNI APODERADO', 'SI', '', '2024-07-28 04:28:32', '1'),
+(11, 'AP.', '6 FOTOS (TAMAÑO CARNET)', 'NO', '', '2024-07-28 04:28:48', '1'),
+(12, 'AP.', 'FOTO FAMILIAR (TAMAÑO JUMBO)', 'NO', '', '2024-07-28 04:29:01', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `documento_detalle`
+--
+
+CREATE TABLE `documento_detalle` (
+  `id` int(11) NOT NULL,
+  `matricula_detalle_id` int(11) NOT NULL,
+  `documento_id` int(11) NOT NULL,
+  `entregado` enum('SI','NO') DEFAULT 'NO',
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('0','1') DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -452,6 +502,20 @@ ALTER TABLE `apoderado`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `documento`
+--
+ALTER TABLE `documento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `matricula_detalle_id` (`matricula_detalle_id`),
+  ADD KEY `documento_id` (`documento_id`);
+
+--
 -- Indices de la tabla `institucion`
 --
 ALTER TABLE `institucion`
@@ -542,6 +606,18 @@ ALTER TABLE `apoderado`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT de la tabla `documento`
+--
+ALTER TABLE `documento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `institucion`
 --
 ALTER TABLE `institucion`
@@ -610,6 +686,13 @@ ALTER TABLE `trabajador`
 --
 ALTER TABLE `alumno`
   ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`apoderado_id`) REFERENCES `apoderado` (`id`);
+
+--
+-- Filtros para la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  ADD CONSTRAINT `documento_detalle_ibfk_1` FOREIGN KEY (`matricula_detalle_id`) REFERENCES `matricula_detalle` (`id`),
+  ADD CONSTRAINT `documento_detalle_ibfk_2` FOREIGN KEY (`documento_id`) REFERENCES `documento` (`id`);
 
 --
 -- Filtros para la tabla `institucion`
