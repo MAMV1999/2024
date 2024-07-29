@@ -64,10 +64,7 @@ switch ($_GET["op"]) {
                 "0" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
                 "1" => $reg->alumno,
                 "2" => $reg->apoderado,
-                "3" => '<div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="btn btn-warning btn-sm" href="Reporte.php?id=' . $reg->id . '" role="button">INFO</a>
-                            <button type="button" class="btn btn-warning btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>
-                        </div>'
+                "3" => '<a class="btn btn-warning" href="Reporte.php?id=' . $reg->id . '" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" role="button">REPORTES</a> <button type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
             );
         }
 

@@ -52,9 +52,20 @@ class PDF extends FPDF
     function SectionData($label, $data)
     {
         // Datos de sección
+        $this->SetFont('Arial', '', 10);
+        $this->Cell(50, 8, utf8_decode($label), 1);
+        $this->Cell(0, 8, utf8_decode($data), 1, 1);
+    }
+
+    function SectionDataDOS($label, $data)
+    {
+        // Datos de sección
+        $width = $this->GetPageWidth() - $this->lMargin - $this->rMargin;
+        $halfWidth = $width / 2;
+        $this->SetFont('Arial', 'B', 11);
+        $this->Cell($halfWidth, 8, utf8_decode($label), 0,0,'R');
         $this->SetFont('Arial', '', 11);
-        $this->Cell(50, 10, utf8_decode($label), 1);
-        $this->Cell(0, 10, utf8_decode($data), 1, 1);
+        $this->Cell($halfWidth, 8, utf8_decode($data), 0, 1);
     }
 
     function Recibo($data)
@@ -65,45 +76,58 @@ class PDF extends FPDF
         $this->SetFont('Arial', 'B', 25);
         $this->Cell(0, 9, utf8_decode($data['institucion_nombre']), 0, 1, 'C');
         $this->SetFont('Arial', 'B', 16);
-        $this->Cell(0, 9, utf8_decode('N.º RECIBO ' . $data['numeracion']), 0, 1, 'C');
-        $this->SetFont('Arial', '', 11);
+        $this->Cell(0, 4, utf8_decode(''), 0, 1, 'C');
+        $this->SetFont('Arial', '', 10);
         $this->Cell(0, 5, utf8_decode($data['institucion_direccion']), 0, 1, 'C');
         $this->Cell(0, 5, utf8_decode('CORREO: '.$data['institucion_correo']), 0, 1, 'C');
         $this->Cell(0, 5, utf8_decode('TELÉFONO: '.$data['institucion_telefono']), 0, 1, 'C');
         $this->Ln(5);
 
         $this->SetFont('Arial', 'B', 13);
-        $this->Cell(0, 7, utf8_decode('MATRÍCULA ' . $data['lectivo']), 0, 1, 'C');
-        $this->Cell(0, 7, utf8_decode($data['lectivo'].' / '.$data['nivel'].' / '.$data['grado']), 0, 1, 'C');
+        $this->Cell(0, 7, utf8_decode('MATRÍCULA ALUMNO ' . $data['razon']), 0, 1, 'C');
         $this->Ln(5);
 
-        // Datos generales
-        $this->SectionTitle('MATRÍCULA');
-        $this->SectionData('MATRICULADO', $data['nivel'].' / '.$data['grado']);
-        $this->SectionData('TIPO DE ALUMNO', $data['razon']);
-        $this->Ln(5);
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 5, utf8_decode('Por medio del siguiente documento yo:'), 0, 1, 'L');
+        $this->Ln(4);
 
-        // Datos del apoderado
-        $this->SectionTitle('APODERADO');
-        $this->SectionData('DNI', $data['apoderado_dni']);
+        $this->SectionTitle('NOMBRE Y APELLIDO APODERADO(A)');
+        $this->SectionData('Nº DNI', $data['apoderado_dni']);
         $this->SectionData('NOMBRE Y APELLIDO', $data['apoderado']);
-        $this->SectionData('TELÉFONO', $data['apoderado_telefono']);
-        $this->Ln(5);
+        $this->SectionData('TELEFONO', $data['apoderado_telefono']);
+        $this->Ln(4);
 
-        // Datos del alumno
-        $this->SectionTitle('ALUMNO');
-        $this->SectionData('DNI', $data['alumno_dni']);
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 5, utf8_decode('Doy consentimiento a matricular a mi menor hijo(a):'), 0, 1, 'L');
+        $this->Ln(4);
+
+        $this->SectionTitle('NOMBRE Y APELLIDO ALUMNO(A)');
+        $this->SectionData('Nº DNI', $data['alumno_dni']);
         $this->SectionData('NOMBRE Y APELLIDO', $data['alumno']);
         $this->SectionData('NACIMIENTO', $data['alumno_nacimiento']);
-        $this->Ln(5);
+        $this->Ln(4);
 
-        // Datos del pago
-        $this->SectionTitle('PAGO');
-        $this->SectionData('Nº RECIBO', $data['numeracion']);
-        $this->SectionData('FECHA', $data['fecha']);
-        $this->SectionData('MONTO', 'S/. '.$data['monto'].' - '.$data['metodo']);
-        $this->SectionData('OBSERVACIONES', $data['observaciones']);
-        $this->Ln(5);
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 5, utf8_decode('En el nivel / grado:'), 0, 1, 'L');
+        $this->Ln(4);
+
+        $this->SectionTitle('NIVEL Y GRADO (QUE PASA EN EL '.$data['lectivo'].')');
+        $this->SectionData('AÑO LECTIVO', $data['lectivo']);
+        $this->SectionData('NIVEL', $data['nivel']);
+        $this->SectionData('GRADO', $data['grado']);
+        $this->SectionData('TIPO DE ALUMNO', $data['razon']);
+        $this->Ln(4);
+
+        
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 30, '', 0, 1, 'C');
+        $this->SetY($this->GetY() - 5);
+        $this->Cell(0, 5, utf8_decode('_______________________________'), 0, 1, 'C');
+        $this->Cell(0, 9, utf8_decode('FIRMA DEL APODERADO(A)'), 0, 1, 'C');
+        $this->SetFont('Arial', '', 11);
+        $this->Cell(0, 6, utf8_decode($data['apoderado']), 0, 1, 'C');
+        $this->Cell(0, 6, utf8_decode($data['apoderado_dni']), 0, 1, 'C');
+
     }
 }
 
