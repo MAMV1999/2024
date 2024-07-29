@@ -52,9 +52,9 @@ class PDF extends FPDF
     function SectionData($label, $data)
     {
         // Datos de sección
-        $this->SetFont('Arial', '', 11);
-        $this->Cell(50, 10, utf8_decode($label), 1);
-        $this->Cell(0, 10, utf8_decode($data), 1, 1);
+        $this->SetFont('Arial', '', 10);
+        $this->Cell(50, 8, utf8_decode($label), 1);
+        $this->Cell(0, 8, utf8_decode($data), 1, 1);
     }
 
     function Recibo($data)
@@ -78,27 +78,29 @@ class PDF extends FPDF
         $this->Ln(5);
 
         // Datos generales
-        $this->SectionTitle('MATRÍCULA');
-        $this->SectionData('MATRICULADO', $data['nivel'].' / '.$data['grado']);
+        $this->SectionTitle('INFORMACION DE MATRÍCULA '.$data['lectivo']);
+        $this->SectionData('AÑO LECTIVO', $data['lectivo']);
+        $this->SectionData('NIVEL', $data['nivel']);
+        $this->SectionData('GRADO', $data['grado']);
         $this->SectionData('TIPO DE ALUMNO', $data['razon']);
         $this->Ln(5);
 
         // Datos del apoderado
-        $this->SectionTitle('APODERADO');
+        $this->SectionTitle('INFORMACION DEL APODERADO');
         $this->SectionData('DNI', $data['apoderado_dni']);
         $this->SectionData('NOMBRE Y APELLIDO', $data['apoderado']);
         $this->SectionData('TELÉFONO', $data['apoderado_telefono']);
         $this->Ln(5);
 
         // Datos del alumno
-        $this->SectionTitle('ALUMNO');
+        $this->SectionTitle('INFORMACION DEL ALUMNO');
         $this->SectionData('DNI', $data['alumno_dni']);
         $this->SectionData('NOMBRE Y APELLIDO', $data['alumno']);
         $this->SectionData('NACIMIENTO', $data['alumno_nacimiento']);
         $this->Ln(5);
 
         // Datos del pago
-        $this->SectionTitle('PAGO');
+        $this->SectionTitle('INFORMACION DEL PAGO');
         $this->SectionData('Nº RECIBO', $data['numeracion']);
         $this->SectionData('FECHA', $data['fecha']);
         $this->SectionData('MONTO', 'S/. '.$data['monto'].' - '.$data['metodo']);
