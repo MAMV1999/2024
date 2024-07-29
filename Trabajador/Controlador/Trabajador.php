@@ -56,13 +56,33 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->nombre_apellido,
-                "1" => ($reg->estado) ? '
-                <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">Edi.</button>
-                <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">Des.</button>
+                "0" => $reg->dni,
+                "1" => $reg->nombre_apellido,
+                "2" =>
+                '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->dni . '">REPORTE PDF</button>
+                
+                    <div class="modal fade" id="' . $reg->dni . '" tabindex="-1" aria-labelledby="' . $reg->dni . '" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="' . $reg->dni . '">' . $reg->nombre_apellido . '</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="../../Reportes/Vista/InformeTrabajador.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>',
+                "3" => ($reg->estado) ? '
+                <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button>
+                <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>
                 ' : '
-                <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">Edi.</button>
-                <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">Act.</button>
+                <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button>
+                <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>
                 '
             );
         }

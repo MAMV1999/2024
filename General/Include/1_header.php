@@ -135,6 +135,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../../Inicio/Vista/Perfil.php"><?php echo $_SESSION['nombre'];?></a></li>
+                            <li><a class="dropdown-item" target="_blank" href="../../Reportes/Vista/InformeTrabajador.php?id=<?php echo $_SESSION['id'];?>">INFORMACION PERSONAL - PDF</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

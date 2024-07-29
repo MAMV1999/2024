@@ -18,7 +18,9 @@ if (!isset($_SESSION['nombre'])) {
             <table class="table" id="myTable">
                 <thead>
                     <tr>
+                        <th>DNI</th>
                         <th>NOMBRE Y APELLIDO</th>
+                        <th>INFORMACION</th>
                         <th>OPCIONES</th>
                     </tr>
                 </thead>

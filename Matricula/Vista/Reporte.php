@@ -22,7 +22,7 @@ if (!isset($_SESSION['nombre'])) {
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                            <iframe src="../../Reportes/Vista/ReportePersonal.php?id=<?php echo $_GET['id']; ?>" type="application/pdf" width="100%" height="600px"></iframe>
+                                <iframe src="../../Reportes/Vista/ReportePersonal.php?id=<?php echo $_GET['id']; ?>" type="application/pdf" width="100%" height="600px"></iframe>
                             </div>
                         </div>
                     </div>
