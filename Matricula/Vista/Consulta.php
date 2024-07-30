@@ -13,7 +13,69 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listadoMatriculados">
-            <h5 class="border-bottom pb-2 mb-0"><b>LISTADO</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>REPORTES PDF</b></h5>
+            <div class="p-3">
+                <?php
+                $array = array(
+                    "1" => array("codigo" => "ReporteMatricula", "nombre" => "MATRICULADOS CANTIDAD"),
+                    "2" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR FECHA"),
+                    "3" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR GRADO"),
+                    "4" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR APODERADO"),
+                    "5" => array("codigo" => "ReporteMatriculaListado", "nombre" => "MATRICULADOS LISTADO"),
+                    "6" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS APODERADO / ALUMNO"),
+                    "7" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS CUMPLEAÑOS")
+                );
+                ?>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">PAGUINA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $a = 1;
+                        while ($a <= count($array)) {
+                            echo '
+                                <tr>
+                                    <th scope="row">' . $a . '</th>
+                                    <th scope="row">' . $array[$a]["nombre"] . '</th>
+                                    <td>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $array[$a]["codigo"] . '">' . $array[$a]["nombre"] . '</button>
+                            
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="' . $array[$a]["codigo"] . '" tabindex="-1" aria-labelledby="' . $array[$a]["codigo"] . 'Label" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="' . $array[$a]["codigo"] . 'Label">' . $array[$a]["nombre"] . '</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <iframe src="../../Reportes/Vista/' . $array[$a]["codigo"] . '.php" type="application/pdf" width="100%" height="600px"></iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">SALIR</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ';
+                            $a++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="my-3 p-3 bg-body rounded shadow-sm" id="listadoMatriculados">
+            <h5 class="border-bottom pb-2 mb-0"><b>INFORMACION</b></h5>
             <div class="p-3">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
