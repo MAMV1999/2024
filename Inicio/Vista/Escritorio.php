@@ -15,35 +15,18 @@ if (!isset($_SESSION['nombre'])) {
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
             <h5 class="border-bottom pb-2 mb-0"><b>CB EBENEZER</b></h5>
             <div class="d-flex text-body-secondary pt-3">
-                <!-- <br>
-                <?php
-                // $array = array(
-                //     "1" => array("nombre" => "MI PERFIL" , "link" => "Perfil.php")
-                // );
-                ?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">NOMBRE</th>
-                            <th scope="col">PAGUINA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // $a = 1;
-                        // while ($a <= count($array)) {
-                        //     echo '<tr>
-                        //         <th scope="row">' . $a . '</th>
-                        //         <td>' . $array[$a]["nombre"] . '</td>
-                        //         <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                        //     </tr>';
-                        //     $a++;
-                        // }
-                        ?>
-                    </tbody>
-                </table> -->
-                <br><br><br><br><br>
+                <div class="card text-center w-100">
+                    <div class="card-header">
+                        <br>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $_SESSION['nombre']; ?></h5>
+                        <p class="card-text"><?php echo $_SESSION['cargo']; ?></p>
+                    </div>
+                    <div class="card-footer text-body-secondary">
+                        <br>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
