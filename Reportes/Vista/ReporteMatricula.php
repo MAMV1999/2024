@@ -8,11 +8,11 @@ class PDF extends FPDF
     function Header()
     {
         // Arial bold 15
-        $this->SetFont('Arial','B',15);
+        $this->SetFont('Arial', 'B', 15);
         // Movernos a la derecha
         $this->Cell(80);
         // Título
-        $this->Cell(30,10,'CANTIDAD DE MATRICULADOS',0,1,'C');
+        $this->Cell(30, 10, 'CANTIDAD DE MATRICULADOS', 0, 1, 'C');
         // Salto de línea
         $this->Ln(20);
     }
@@ -23,9 +23,9 @@ class PDF extends FPDF
         // Posición a 1.5 cm del final
         $this->SetY(-15);
         // Arial italic 8
-        $this->SetFont('Arial','I',8);
+        $this->SetFont('Arial', 'I', 8);
         // Número de página
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
 
@@ -39,13 +39,13 @@ $matriculados = $reporte->listarMatriculados();
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
-$pdf->SetFont('Arial','B',12);
+$pdf->SetFont('Arial', 'B', 12);
 
 // Encabezados de la tabla
-$pdf->Cell(50,10,'Lectivo',1);
-$pdf->Cell(50,10,'Nivel',1);
-$pdf->Cell(50,10,'Grado',1);
-$pdf->Cell(40,10,'Cantidad',1);
+$pdf->Cell(50, 10, 'LECTIVO', 1, 0, 'C');
+$pdf->Cell(50, 10, 'NIVEL', 1, 0, 'C');
+$pdf->Cell(50, 10, 'GRADO', 1, 0, 'C');
+$pdf->Cell(40, 10, 'ALUMNOS', 1, 0, 'C');
 $pdf->Ln();
 
 // Variable para seguimiento de valores anteriores
@@ -79,7 +79,7 @@ foreach ($data as $row) {
     if ($row['lectivo'] !== $prevLectivo) {
         $prevLectivo = $row['lectivo'];
         $prevLectivoRowCount = $lectivoCounts[$row['lectivo']];
-        $pdf->Cell(50, 10 * $prevLectivoRowCount, utf8_decode($row['lectivo']), 1);
+        $pdf->Cell(50, 10 * $prevLectivoRowCount, utf8_decode($row['lectivo']), 1, 0, 'C');
     } else {
         $pdf->Cell(50, 10, '', 0);
     }
@@ -88,7 +88,7 @@ foreach ($data as $row) {
     if ($row['nivel'] !== $prevNivel || $row['lectivo'] !== $prevLectivo) {
         $prevNivel = $row['nivel'];
         $prevNivelRowCount = $nivelCounts[$row['lectivo']][$row['nivel']];
-        $pdf->Cell(50, 10 * $prevNivelRowCount, utf8_decode($row['nivel']), 1);
+        $pdf->Cell(50, 10 * $prevNivelRowCount, utf8_decode($row['nivel']), 1, 0, 'C');
     } else {
         $pdf->Cell(50, 10, '', 0);
     }
@@ -97,12 +97,12 @@ foreach ($data as $row) {
     if ($row['grado'] !== $prevGrado || $row['nivel'] !== $prevNivel || $row['lectivo'] !== $prevLectivo) {
         $prevGrado = $row['grado'];
         $prevGradoRowCount = $gradoCounts[$row['lectivo']][$row['nivel']][$row['grado']];
-        $pdf->Cell(50, 10 * $prevGradoRowCount, utf8_decode($row['grado']), 1);
+        $pdf->Cell(50, 10 * $prevGradoRowCount, utf8_decode($row['grado']), 1, 0, 'C');
     } else {
         $pdf->Cell(50, 10, '', 0);
     }
 
-    $pdf->Cell(40, 10, $row['cantidad_matriculados'], 1);
+    $pdf->Cell(40, 10, $row['cantidad_matriculados'], 1, 0, 'C');
     $pdf->Ln();
 
     // Sumar al total de matriculados
@@ -110,11 +110,10 @@ foreach ($data as $row) {
 }
 
 // Fila de total
-$pdf->SetFont('Arial','B',12);
-$pdf->Cell(150,10,'Total',1);
-$pdf->Cell(40,10,$totalMatriculados,1);
+$pdf->SetFont('Arial', 'B', 12);
+$pdf->Cell(150, 10, 'TOTAL', 1, 0, 'C');
+$pdf->Cell(40, 10, $totalMatriculados, 1, 0, 'C');
 $pdf->Ln();
 
 // Salida del documento
 $pdf->Output();
-?>
