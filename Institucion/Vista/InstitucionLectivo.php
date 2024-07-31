@@ -45,6 +45,13 @@ if (!isset($_SESSION['nombre'])) {
             </div>
 
             <div class="p-3">
+                <label for="lectivo_nombre" class="form-label"><b>AÑO LECTIVO:</b></label>
+                <div class="input-group">
+                    <input type="text" id="lectivo_nombre" name="lectivo_nombre" placeholder="Nombre del Año Lectivo" class="form-control">
+                </div>
+            </div>
+
+            <div class="p-3">
                 <label for="institucion_id" class="form-label"><b>INSTITUCIÓN:</b></label>
                 <div class="input-group">
                     <select id="institucion_id" name="institucion_id" class="form-control selectpicker" data-live-search="true"></select>

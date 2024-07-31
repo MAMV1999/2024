@@ -17,20 +17,19 @@ if (!isset($_SESSION['nombre'])) {
             <div class="p-3">
                 <?php
                 $array = array(
-                    "1" => array("codigo" => "ReporteMatricula", "nombre" => "MATRICULADOS CANTIDAD"),
-                    "2" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR FECHA"),
-                    "3" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR GRADO"),
-                    "4" => array("codigo" => "ReporteMatriculaPagosApoderado", "nombre" => "MATRICULADOS PAGOS POR APODERADO"),
-                    "5" => array("codigo" => "ReporteMatriculaListado", "nombre" => "MATRICULADOS LISTADO"),
-                    "6" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS APODERADO / ALUMNO"),
-                    "7" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS CUMPLEAÑOS")
+                    "1" => array("codigo" => "ReporteMatricula", "nombre" => "CANTIDAD DE ALUMNOS"),
+                    "2" => array("codigo" => "ReporteMatriculaListado", "nombre" => "LISTADO DE ALUMNOS"),
+                    "3" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "PAGOS AGRUPADO POR FECHA"),
+                    "4" => array("codigo" => "ReporteMatriculaPagosGrado", "nombre" => "PAGOS AGRUPADO POR GRADO"),
+                    "5" => array("codigo" => "ReporteMatriculaPagosApoderado", "nombre" => "PAGOS AGRUPADO POR APODERADO"),
+                    "6" => array("codigo" => "ReportePersonal", "nombre" => "CUMPLEAÑOS")
                 );
                 ?>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NOMBRE</th>
+                            <th scope="col">MATRICULADOS</th>
                             <th scope="col">PAGUINA</th>
                         </tr>
                     </thead>

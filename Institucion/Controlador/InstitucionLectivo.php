@@ -5,14 +5,15 @@ $institucionLectivo = new InstitucionLectivo();
 $id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
 $nombre = isset($_POST["nombre"]) ? limpiarcadena($_POST["nombre"]) : "";
 $institucion_id = isset($_POST["institucion_id"]) ? limpiarcadena($_POST["institucion_id"]) : "";
+$lectivo_nombre = isset($_POST["lectivo_nombre"]) ? limpiarcadena($_POST["lectivo_nombre"]) : "";
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         if (empty($id)) {
-            $rspta = $institucionLectivo->guardar($nombre, $institucion_id);
+            $rspta = $institucionLectivo->guardar($nombre, $institucion_id, $lectivo_nombre);
             echo $rspta ? "Institución lectiva registrada correctamente" : "No se pudo registrar la institución lectiva";
         } else {
-            $rspta = $institucionLectivo->editar($id, $nombre, $institucion_id);
+            $rspta = $institucionLectivo->editar($id, $nombre, $institucion_id, $lectivo_nombre);
             echo $rspta ? "Institución lectiva actualizada correctamente" : "No se pudo actualizar la institución lectiva";
         }
         break;
@@ -40,7 +41,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'AÑO LECTIVO '.$reg->nombre,
+                "0" => $reg->nombre,
                 "1" => $reg->institucion,
                 "2" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'

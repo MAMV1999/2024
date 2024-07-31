@@ -8,18 +8,18 @@ class InstitucionLectivo
     }
 
     // Método para guardar una nueva institución lectiva
-    public function guardar($nombre, $institucion_id)
+    public function guardar($nombre, $institucion_id, $lectivo_nombre)
     {
-        $sql = "INSERT INTO institucion_lectivo (nombre, institucion_id, estado) 
-                VALUES ('$nombre', '$institucion_id', '1')";
+        $sql = "INSERT INTO institucion_lectivo (nombre, institucion_id, lectivo_nombre, estado) 
+                VALUES ('$nombre', '$institucion_id', '$lectivo_nombre', '1')";
         return ejecutarConsulta($sql);
     }
 
     // Método para editar una institución lectiva existente
-    public function editar($id, $nombre, $institucion_id)
+    public function editar($id, $nombre, $institucion_id, $lectivo_nombre)
     {
         $sql = "UPDATE institucion_lectivo 
-                SET nombre='$nombre', institucion_id='$institucion_id' 
+                SET nombre='$nombre', institucion_id='$institucion_id', lectivo_nombre='$lectivo_nombre' 
                 WHERE id='$id'";
         return ejecutarConsulta($sql);
     }
@@ -34,7 +34,7 @@ class InstitucionLectivo
     // Método para listar todas las instituciones lectivas
     public function listar()
     {
-        $sql = "SELECT il.id, il.nombre, i.nombre AS institucion, il.estado
+        $sql = "SELECT il.id, il.nombre, il.lectivo_nombre, i.nombre AS institucion, il.estado
                 FROM institucion_lectivo il
                 LEFT JOIN institucion i ON il.institucion_id = i.id";
         return ejecutarConsulta($sql);

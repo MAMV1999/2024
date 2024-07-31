@@ -74,28 +74,26 @@ class ReporteMatricula
     public function listarMatriculados()
     {
         $sql = "SELECT 
-                    il.nombre as lectivo,
-                    iniv.nombre as nivel,
-                    ig.nombre as grado,
-                    COUNT(md.id) as cantidad_matriculados
+                    il.nombre AS lectivo,
+                    niv.nombre AS nivel,
+                    ig.nombre AS grado,
+                    COUNT(md.alumno_id) AS cantidad_matriculados
                 FROM 
-                    matricula_detalle md
-                JOIN 
-                    institucion_grado ig ON md.matricula_id = ig.id
-                JOIN 
-                    institucion_nivel iniv ON ig.institucion_nivel_id = iniv.id
-                JOIN 
-                    institucion_lectivo il ON iniv.institucion_lectivo_id = il.id
-                WHERE 
-                    md.estado = '1'
+                    institucion_lectivo il
+                LEFT JOIN 
+                    institucion_nivel niv ON il.id = niv.institucion_lectivo_id
+                LEFT JOIN 
+                    institucion_grado ig ON niv.id = ig.institucion_nivel_id
+                LEFT JOIN 
+                    matricula m ON ig.id = m.institucion_grado_id
+                LEFT JOIN 
+                    matricula_detalle md ON m.id = md.matricula_id
+                LEFT JOIN 
+                    alumno al ON md.alumno_id = al.id AND al.estado = '1' -- Considerando solo alumnos activos
                 GROUP BY 
-                    il.nombre, 
-                    iniv.nombre, 
-                    ig.nombre
+                    il.nombre, niv.nombre, ig.nombre
                 ORDER BY 
-                    il.nombre ASC, 
-                    iniv.nombre ASC, 
-                    ig.nombre ASC";
+                    il.nombre ASC, niv.nombre ASC, ig.nombre ASC";
         return ejecutarConsulta($sql);
     }
 
@@ -244,7 +242,7 @@ class ReporteMatricula
             JOIN 
                 matricula_metodo mm ON mp.matricula_metodo_id = mm.id
             ORDER BY 
-            il.nombre ASC, niv.nombre ASC, ig.nombre ASC, mp.fecha ASC, mm.nombre ASC";
+            il.nombre ASC, niv.nombre ASC, ig.nombre ASC, mp.fecha ASC, mp.numeracion ASC";
         return ejecutarConsulta($sql);
     }
 }

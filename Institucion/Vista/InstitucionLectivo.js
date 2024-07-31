@@ -29,6 +29,7 @@ function limpiar() {
     $("#id").val("");
     $("#nombre").val("");
     $("#institucion_id").val("");
+    $("#lectivo_nombre").val("");
 }
 
 function MostrarListado() {
@@ -72,6 +73,7 @@ function mostrar(id) {
             $("#id").val(data.id);
             $("#nombre").val(data.nombre);
             $("#institucion_id").val(data.institucion_id);
+            $("#lectivo_nombre").val(data.lectivo_nombre);
             $('#institucion_id').selectpicker('refresh');
         }
     );
