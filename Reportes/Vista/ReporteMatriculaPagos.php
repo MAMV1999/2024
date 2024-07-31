@@ -35,12 +35,13 @@ class PDF extends FPDF
     function TableHeader()
     {
         $this->SetFont('Arial','B',9);
-        $this->Cell(74.79,10,strtoupper('Apoderado'),1,0,'C');
-        $this->Cell(97,10,strtoupper('Alumno'),1,0,'C');
-        $this->Cell(25.2,10,strtoupper('Numeracion'),1,0,'C');
-        $this->Cell(25.2,10,strtoupper('Fecha Pago'),1,0,'C');
-        $this->Cell(16.94,10,strtoupper('Monto'),1,0,'C');
-        $this->Cell(37.5,10,strtoupper('Metodo Pago'),1,0,'C');
+        $this->SetFillColor(188, 188, 188);
+        $this->Cell(74.79,10,strtoupper('Apoderado'),1,0,'C',true);
+        $this->Cell(97,10,strtoupper('Alumno'),1,0,'C',true);
+        $this->Cell(25.2,10,strtoupper('Numeracion'),1,0,'C',true);
+        $this->Cell(25.2,10,strtoupper('Fecha Pago'),1,0,'C',true);
+        $this->Cell(16.94,10,strtoupper('Monto'),1,0,'C',true);
+        $this->Cell(37.5,10,strtoupper('Metodo Pago'),1,0,'C',true);
         $this->Ln();
     }
 
@@ -103,7 +104,8 @@ class PDF extends FPDF
     {
         $this->Ln(10); // Salto de línea
         $this->SetFont('Arial','B',9);
-        $this->Cell(138.5,10,strtoupper('Totales por Metodo de Pago'),1,1,'C');
+        $this->SetFillColor(188, 188, 188);
+        $this->Cell(138.5,10,strtoupper('Totales por Metodo de Pago'),1,1,'C',true);
         $this->SetFont('Arial','',9);
 
         $totalGeneral = 0;
@@ -117,8 +119,9 @@ class PDF extends FPDF
 
         // Agregar fila total
         $this->SetFont('Arial','B',9);
-        $this->Cell(101.5,7,strtoupper('Total'),1,0,'L');
-        $this->Cell(37,7,number_format($totalGeneral, 2),1,1,'R');
+        $this->SetFillColor(188, 188, 188);
+        $this->Cell(101.5,7,strtoupper('Total'),1,0,'L',true);
+        $this->Cell(37,7,number_format($totalGeneral, 2),1,1,'R',true);
     }
 
     // Función para contar el número de líneas necesarias para el texto

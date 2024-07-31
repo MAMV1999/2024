@@ -20,7 +20,7 @@ if (!isset($_SESSION['nombre'])) {
                     "1" => array("codigo" => "ReporteMatricula", "nombre" => "MATRICULADOS CANTIDAD"),
                     "2" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR FECHA"),
                     "3" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR GRADO"),
-                    "4" => array("codigo" => "ReporteMatriculaPagos", "nombre" => "MATRICULADOS PAGOS POR APODERADO"),
+                    "4" => array("codigo" => "ReporteMatriculaPagosApoderado", "nombre" => "MATRICULADOS PAGOS POR APODERADO"),
                     "5" => array("codigo" => "ReporteMatriculaListado", "nombre" => "MATRICULADOS LISTADO"),
                     "6" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS APODERADO / ALUMNO"),
                     "7" => array("codigo" => "ReportePersonal", "nombre" => "MATRICULADOS CUMPLEAÑOS")

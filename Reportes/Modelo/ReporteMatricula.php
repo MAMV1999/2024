@@ -149,4 +149,102 @@ class ReporteMatricula
                 mp.numeracion ASC";
         return ejecutarConsulta($sql);
     }
+
+    public function matriculadospagos_apoderado()
+    {
+        $sql = "SELECT 
+                md.id,
+                il.nombre AS institucion_lectivo,
+                niv.nombre AS institucion_nivel,
+                ig.nombre AS institucion_grado,
+                mr.nombre AS matricula_razon,
+                md.apoderado_id,
+                a.dni AS apoderado_dni,
+                a.nombreyapellido AS apoderado,
+                a.telefono AS apoderado_telefono,
+                md.alumno_id,
+                al.dni AS alumno_dni,
+                al.nombreyapellido AS alumno,
+                DATE_FORMAT(al.nacimiento, '%d/%m/%Y') AS alumno_nacimiento,
+                FLOOR(DATEDIFF(CURDATE(), al.nacimiento) / 365.25) AS alumno_edad,
+                mp.numeracion,
+                DATE_FORMAT(mp.fecha, '%d/%m/%Y') AS pago_fecha,
+                mp.monto AS pago_monto,
+                mm.nombre AS metodo_pago,
+                mp.observaciones AS pago_observaciones
+            FROM 
+                matricula_detalle md
+            JOIN 
+                matricula_razon mr ON md.matricula_razon_id = mr.id
+            JOIN 
+                matricula m ON md.matricula_id = m.id
+            JOIN 
+                institucion_grado ig ON m.institucion_grado_id = ig.id
+            JOIN 
+                institucion_nivel niv ON ig.institucion_nivel_id = niv.id
+            JOIN 
+                institucion_lectivo il ON niv.institucion_lectivo_id = il.id
+            JOIN 
+                apoderado a ON md.apoderado_id = a.id
+            JOIN 
+                alumno al ON md.alumno_id = al.id
+            JOIN 
+                trabajador t ON md.trabajador_sesion_id = t.id
+            JOIN 
+                matricula_pago mp ON md.id = mp.matricula_detalle_id
+            JOIN 
+                matricula_metodo mm ON mp.matricula_metodo_id = mm.id
+            ORDER BY 
+            a.nombreyapellido ASC";
+        return ejecutarConsulta($sql);
+    }
+
+    public function matriculadospagos_grado()
+    {
+        $sql = "SELECT 
+                md.id,
+                il.nombre AS institucion_lectivo,
+                niv.nombre AS institucion_nivel,
+                ig.nombre AS institucion_grado,
+                mr.nombre AS matricula_razon,
+                md.apoderado_id,
+                a.dni AS apoderado_dni,
+                a.nombreyapellido AS apoderado,
+                a.telefono AS apoderado_telefono,
+                md.alumno_id,
+                al.dni AS alumno_dni,
+                al.nombreyapellido AS alumno,
+                DATE_FORMAT(al.nacimiento, '%d/%m/%Y') AS alumno_nacimiento,
+                FLOOR(DATEDIFF(CURDATE(), al.nacimiento) / 365.25) AS alumno_edad,
+                mp.numeracion,
+                DATE_FORMAT(mp.fecha, '%d/%m/%Y') AS pago_fecha,
+                mp.monto AS pago_monto,
+                mm.nombre AS metodo_pago,
+                mp.observaciones AS pago_observaciones
+            FROM 
+                matricula_detalle md
+            JOIN 
+                matricula_razon mr ON md.matricula_razon_id = mr.id
+            JOIN 
+                matricula m ON md.matricula_id = m.id
+            JOIN 
+                institucion_grado ig ON m.institucion_grado_id = ig.id
+            JOIN 
+                institucion_nivel niv ON ig.institucion_nivel_id = niv.id
+            JOIN 
+                institucion_lectivo il ON niv.institucion_lectivo_id = il.id
+            JOIN 
+                apoderado a ON md.apoderado_id = a.id
+            JOIN 
+                alumno al ON md.alumno_id = al.id
+            JOIN 
+                trabajador t ON md.trabajador_sesion_id = t.id
+            JOIN 
+                matricula_pago mp ON md.id = mp.matricula_detalle_id
+            JOIN 
+                matricula_metodo mm ON mp.matricula_metodo_id = mm.id
+            ORDER BY 
+            il.nombre ASC, niv.nombre ASC, ig.nombre ASC, mp.fecha ASC, mm.nombre ASC";
+        return ejecutarConsulta($sql);
+    }
 }
