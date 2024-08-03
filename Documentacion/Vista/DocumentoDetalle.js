@@ -26,6 +26,7 @@ function listar() {
             { data: "grado" },
             { data: "alumno" },
             { data: "apoderado" },
+            { data: "info" },
             { data: "acciones" }
         ],
         destroy: true

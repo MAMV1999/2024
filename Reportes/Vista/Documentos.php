@@ -4,13 +4,30 @@ require_once("../Modelo/Documentos.php");
 
 class PDF extends FPDF
 {
+    protected $institucionNombre;
+    protected $institucionDireccion;
+
+    // Constructor para inicializar el nombre y dirección de la institución
+    function __construct($orientation='P', $unit='mm', $size='A4', $institucionNombre='', $institucionDireccion='')
+    {
+        parent::__construct($orientation, $unit, $size);
+        $this->institucionNombre = $institucionNombre;
+        $this->institucionDireccion = $institucionDireccion;
+    }
+
     // Cabecera de página
     function Header()
     {
+        // Subtítulo con el nombre de la institución
+        $this->SetFont('Arial', 'B', 20);
+        $this->Cell(0, 8, utf8_decode($this->institucionNombre), 0, 1, 'C');
         // Arial bold 15
-        $this->SetFont('Arial', 'B', 15);
+        $this->SetFont('Arial', 'B', 14);
         // Título
-        $this->Cell(0, 10, 'Reporte de Documentos', 0, 1, 'C');
+        $this->Cell(0, 7, utf8_decode('ENTREGA DE DOCUMENTACIÓN'), 0, 1, 'C');
+        // Dirección
+        $this->SetFont('Arial', '', 10);
+        $this->Cell(0, 6, utf8_decode($this->institucionDireccion), 0, 1, 'C');
         // Salto de línea
         $this->Ln(10);
     }
@@ -23,22 +40,43 @@ class PDF extends FPDF
         // Arial italic 8
         $this->SetFont('Arial', 'I', 8);
         // Número de página
-        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    // Tabla simple
-    function BasicTable($header, $data)
+    // Tabla de datos generales
+    function GeneralData($data)
+    {
+        // Datos generales
+        $this->SetFont('Arial', 'B', 11);
+        $this->Cell(0, 8, utf8_decode('DATOS GENERALES'), 1, 1, 'C');
+        
+        foreach ($data as $label => $value) {
+            $this->SetFont('Arial', 'B', 10);
+            $this->Cell(60, 8, utf8_decode($label), 1, 0, 'L');
+            $this->SetFont('Arial', '', 10);
+            $this->Cell(130, 8, utf8_decode($value), 1, 1, 'L');
+        }
+        $this->Ln(10);
+    }
+
+    // Tabla de documentación
+    function DocumentationTable($data)
     {
         // Cabecera
-        foreach ($header as $col) {
-            $this->Cell(40, 7, $col, 1);
-        }
+        $this->SetFont('Arial', 'B', 10);
+        $this->Cell(10, 8, utf8_decode('N.º'), 1, 0, 'C');
+        $this->Cell(100, 8, utf8_decode('DOCUMENTO'), 1);
+        $this->Cell(20, 8, utf8_decode('SI / NO'), 1, 0, 'C');
+        $this->Cell(0, 8, utf8_decode('OBSERVACIONES'), 1);
         $this->Ln();
+        
         // Datos
+        $this->SetFont('Arial', '', 10);
         foreach ($data as $row) {
-            foreach ($row as $col) {
-                $this->Cell(40, 6, utf8_decode($col), 1);
-            }
+            $this->Cell(10, 8, utf8_decode($row['numero']), 1, 0, 'C');
+            $this->Cell(100, 8, utf8_decode($row['nombre']), 1);
+            $this->Cell(20, 8, utf8_decode($row['entregado']), 1, 0, 'C');
+            $this->Cell(0, 8, utf8_decode($row['observaciones']), 1);
             $this->Ln();
         }
     }
@@ -53,43 +91,68 @@ $id = $_GET['id'];
 // Obtener el reporte dinámico
 $reporte = $documentos->obtenerReporteDinamico($id);
 
-// Crear un nuevo objeto PDF en orientación vertical
-$pdf = new PDF('P', 'mm', 'A4'); // 'P' para orientación vertical
+// Obtener el nombre, dirección de la institución, nombre del apoderado y otros datos del primer resultado
+$institucionNombre = '';
+$institucionDireccion = '';
+$apoderadoNombre = '';
+$institucionLectivo = '';
+$institucionNivel = '';
+$institucionGrado = '';
+$alumnoNombre = '';
+$documentosData = [];
+if ($reporte) {
+    $fila = $reporte->fetch_assoc();
+    $institucionNombre = isset($fila['institucion_nombre']) ? $fila['institucion_nombre'] : '';
+    $institucionDireccion = isset($fila['institucion_direccion']) ? $fila['institucion_direccion'] : '';
+    $apoderadoNombre = isset($fila['apoderado_nombre']) ? $fila['apoderado_nombre'] : '';
+    $institucionLectivo = isset($fila['institucion_lectivo']) ? $fila['institucion_lectivo'] : '';
+    $institucionNivel = isset($fila['institucion_nivel']) ? $fila['institucion_nivel'] : '';
+    $institucionGrado = isset($fila['institucion_grado']) ? $fila['institucion_grado'] : '';
+    $alumnoNombre = isset($fila['alumno_nombre']) ? $fila['alumno_nombre'] : '';
+
+    // Procesar los datos de los documentos
+    $i = 1;
+    foreach ($fila as $columna => $valor) {
+        if (!in_array($columna, ['id', 'institucion_nombre', 'institucion_telefono', 'institucion_correo', 'institucion_direccion', 'institucion_lectivo', 'institucion_nivel', 'institucion_grado', 'matricula_razon', 'apoderado_id', 'apoderado_nombre', 'apoderado_telefono', 'alumno_id', 'alumno_nombre'])) {
+            if (strpos($columna, '_observaciones') === false) {
+                $documentoNombre = $columna;
+                $observacionesColumna = $columna . '_observaciones';
+                $documentosData[] = [
+                    'numero' => $i,
+                    'nombre' => $documentoNombre,
+                    'entregado' => isset($fila[$columna]) ? $fila[$columna] : '',
+                    'observaciones' => isset($fila[$observacionesColumna]) ? $fila[$observacionesColumna] : ''
+                ];
+                $i++;
+            }
+        }
+    }
+    // Reiniciar el puntero del resultado
+    $reporte->data_seek(0);
+}
+
+// Establecer la zona horaria a Lima, Perú
+date_default_timezone_set('America/Lima');
+
+// Obtener la fecha de emisión actual
+$fechaEmision = date('d/m/Y');
+
+// Crear un nuevo objeto PDF en orientación vertical con el nombre y dirección de la institución
+$pdf = new PDF('P', 'mm', 'A4', $institucionNombre, $institucionDireccion);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-// Encabezados de la tabla
-$header = ['ID', 'Lectivo', 'Nivel', 'Grado', 'Razon', 'Apoderado ID', 'Apoderado Nombre', 'Apoderado Telefono', 'Alumno ID', 'Alumno Nombre'];
+// Datos generales
+$generalData = [
+    'FECHA DE EMISIÓN' => $fechaEmision,
+    'LECTIVO / NIVEL / GRADO' => "$institucionLectivo / $institucionNivel / $institucionGrado",
+    'APODERADO(A)' => $apoderadoNombre,
+    'ALUMNO(A)' => $alumnoNombre
+];
+$pdf->GeneralData($generalData);
 
-// Obtener las columnas dinámicas
-$columnasDinamicas = [];
-if ($reporte) {
-    while ($fila = $reporte->fetch_assoc()) {
-        foreach ($fila as $columna => $valor) {
-            if (!in_array($columna, $header)) {
-                $columnasDinamicas[] = $columna;
-            }
-        }
-        break;
-    }
-}
-
-// Combinar encabezados fijos y dinámicos
-$header = array_merge($header, $columnasDinamicas);
-
-// Reiniciar el puntero del resultado
-$reporte->data_seek(0);
-
-// Datos de la tabla
-$data = [];
-if ($reporte) {
-    while ($fila = $reporte->fetch_assoc()) {
-        $data[] = $fila;
-    }
-}
-
-// Generar la tabla en el PDF
-$pdf->BasicTable($header, $data);
+// Generar la tabla de documentación en el PDF
+$pdf->DocumentationTable($documentosData);
 
 // Salida del documento
 $pdf->Output();

@@ -21,6 +21,7 @@ if (!isset($_SESSION['nombre'])) {
                             <th>GRADO</th>
                             <th>ALUMNO</th>
                             <th>APODERADO</th>
+                            <th>INFO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
