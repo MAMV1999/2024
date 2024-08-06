@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-08-2024 a las 06:41:18
+-- Tiempo de generación: 06-08-2024 a las 12:08:09
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -210,6 +210,117 @@ INSERT INTO `apoderado` (`id`, `usuario`, `contraseña`, `dni`, `nombreyapellido
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `area_curricular`
+--
+
+CREATE TABLE `area_curricular` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `institucion_nivel_id` int(11) NOT NULL,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('0','1') DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `area_curricular`
+--
+
+INSERT INTO `area_curricular` (`id`, `nombre`, `institucion_nivel_id`, `fechacreado`, `estado`) VALUES
+(1, 'COMUNICACIÓN', 1, '2024-08-06 08:02:53', '1'),
+(2, 'PERSONAL SOCIAL', 1, '2024-08-06 08:02:53', '1'),
+(3, 'PSICOMOTRIZ', 1, '2024-08-06 08:02:53', '1'),
+(4, 'DESCUBRIMIENTO DEL MUNDO', 1, '2024-08-06 08:02:53', '1'),
+(5, 'CASTELLANO COMO SEGUNDA LENGUA', 1, '2024-08-06 08:02:53', '1'),
+(6, 'CIENCIA Y TECNOLOGÍA', 1, '2024-08-06 08:02:53', '1'),
+(7, 'MATEMÁTICA', 1, '2024-08-06 08:02:53', '1'),
+(8, 'SE DESENVUELVE EN ENTORNOS VIRTUALES GENERADOS POR LAS TIC', 1, '2024-08-06 08:02:53', '1'),
+(9, 'GESTIONA SU APRENDIZAJE DE MANERA AUTÓNOMA', 1, '2024-08-06 08:02:53', '1'),
+(10, 'TUTORÍA', 1, '2024-08-06 08:02:53', '1'),
+(11, 'COMUNICACIÓN', 2, '2024-08-06 08:05:04', '1'),
+(12, 'PERSONAL SOCIAL', 2, '2024-08-06 08:05:04', '1'),
+(13, 'CASTELLANO COMO SEGUNDA LENGUA', 2, '2024-08-06 08:05:04', '1'),
+(14, 'CIENCIA Y TECNOLOGÍA', 2, '2024-08-06 08:05:04', '1'),
+(15, 'MATEMÁTICA', 2, '2024-08-06 08:05:04', '1'),
+(16, 'ARTE Y CULTURA', 2, '2024-08-06 08:05:04', '1'),
+(17, 'INGLÉS COMO LENGUA EXTRANJERA', 2, '2024-08-06 08:05:04', '1'),
+(18, 'SE DESENVUELVE EN ENTORNOS VIRTUALES GENERADOS POR LAS TIC', 2, '2024-08-06 08:05:04', '1'),
+(19, 'GESTIONA SU APRENDIZAJE DE MANERA AUTÓNOMA', 2, '2024-08-06 08:05:04', '1'),
+(20, 'EDUCACIÓN FÍSICA', 2, '2024-08-06 08:05:04', '1'),
+(21, 'EDUCACIÓN RELIGIOSA', 2, '2024-08-06 08:05:04', '1'),
+(22, 'TUTORÍA', 2, '2024-08-06 08:05:04', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `competencia`
+--
+
+CREATE TABLE `competencia` (
+  `id` int(11) NOT NULL,
+  `area_curricular_id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('0','1') DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `competencia`
+--
+
+INSERT INTO `competencia` (`id`, `area_curricular_id`, `nombre`, `fechacreado`, `estado`) VALUES
+(2, 1, 'Se comunica oralmente en su lengua materna', '2024-08-06 08:50:07', '1'),
+(3, 1, 'Lee diversos tipos de texto en su lengua materna', '2024-08-06 08:50:07', '1'),
+(4, 1, 'Crea proyectos desde los lenguajes del arte', '2024-08-06 08:50:07', '1'),
+(5, 1, 'Escribe diversos tipos de texto en su lengua materna', '2024-08-06 08:50:07', '1'),
+(6, 2, 'Construye su identidad', '2024-08-06 08:59:57', '1'),
+(7, 2, 'Convive y participa democráticamente en la búsqueda del bien común', '2024-08-06 08:59:57', '1'),
+(8, 2, 'Construye su identidad, como persona humana, amada por Dios, digna, libre y trascendente, comprendiendo la doctrina de su propia religión, abierto al diálogo con las que le son cercanas', '2024-08-06 08:59:57', '1'),
+(9, 3, 'Se desenvuelve de manera autónoma a través de su motricidad', '2024-08-06 08:59:57', '1'),
+(10, 4, 'Resuelve problemas de cantidad', '2024-08-06 08:59:57', '1'),
+(11, 4, 'Resuelve problemas de forma, movimiento y localización', '2024-08-06 08:59:57', '1'),
+(12, 4, 'Indaga mediante métodos científicos para construir sus conocimientos', '2024-08-06 08:59:57', '1'),
+(13, 5, 'Se comunica oralmente', '2024-08-06 08:59:57', '1'),
+(14, 6, 'Indaga mediante métodos científicos para construir sus conocimientos', '2024-08-06 08:59:57', '1'),
+(15, 7, 'Resuelve problemas de cantidad', '2024-08-06 08:59:57', '1'),
+(16, 7, 'Resuelve problemas de forma, movimiento y localización', '2024-08-06 08:59:57', '1'),
+(17, 8, 'SE DESENVUELVE EN ENTORNOS VIRTUALES GENERADOS POR LAS TIC', '2024-08-06 08:59:57', '1'),
+(18, 9, 'GESTIONA SU APRENDIZAJE DE MANERA AUTÓNOMA', '2024-08-06 08:59:57', '1'),
+(19, 10, 'Tutoría', '2024-08-06 08:59:57', '1'),
+(20, 11, 'Se comunica oralmente en su lengua materna', '2024-08-06 09:16:18', '1'),
+(21, 11, 'Escribe diversos tipos de textos en su lengua materna', '2024-08-06 09:16:18', '1'),
+(22, 11, 'Lee diversos tipos de textos escritos en su lengua materna', '2024-08-06 09:16:18', '1'),
+(23, 12, 'Construye su identidad', '2024-08-06 09:16:18', '1'),
+(24, 12, 'Convive y participa democráticamente en la búsqueda del bien común', '2024-08-06 09:16:18', '1'),
+(25, 12, 'Construye interpretaciones históricas', '2024-08-06 09:16:18', '1'),
+(26, 12, 'Gestiona responsablemente el espacio y el ambiente', '2024-08-06 09:16:18', '1'),
+(27, 12, 'Gestiona responsablemente los recursos económicos', '2024-08-06 09:16:18', '1'),
+(28, 13, 'Se comunica oralmente', '2024-08-06 09:16:18', '1'),
+(29, 13, 'Lee diversos tipos de textos escritos', '2024-08-06 09:16:18', '1'),
+(30, 13, 'Escribe diversos tipos de textos', '2024-08-06 09:16:18', '1'),
+(31, 14, 'Indaga mediante métodos científicos para construir sus conocimientos', '2024-08-06 09:16:18', '1'),
+(32, 14, 'Explica el mundo físico basándose en conocimientos sobre los seres vivos; materia y energía; biodiversidad, Tierra y Universo', '2024-08-06 09:16:18', '1'),
+(33, 14, 'Diseña y construye soluciones tecnológicas para resolver problemas de su entorno', '2024-08-06 09:16:18', '1'),
+(34, 15, 'Resuelve problemas de cantidad', '2024-08-06 09:16:18', '1'),
+(35, 15, 'Resuelve problemas de regularidad, equivalencia y cambio', '2024-08-06 09:16:18', '1'),
+(36, 15, 'Resuelve problemas de forma, movimiento y localización', '2024-08-06 09:16:18', '1'),
+(37, 15, 'Resuelve problemas de gestión de datos e incertidumbre', '2024-08-06 09:16:18', '1'),
+(38, 16, 'Aprecia de manera crítica manifestaciones artístico-culturales', '2024-08-06 09:16:18', '1'),
+(39, 16, 'Crea proyectos desde los lenguajes artísticos', '2024-08-06 09:16:18', '1'),
+(40, 17, 'Se comunica oralmente en inglés como lengua extranjera', '2024-08-06 09:16:18', '1'),
+(41, 17, 'Lee diversos tipos de textos escritos en inglés como lengua extranjera', '2024-08-06 09:16:18', '1'),
+(42, 17, 'Escribe diversos tipos de textos en inglés como lengua extranjera', '2024-08-06 09:16:18', '1'),
+(43, 18, 'SE DESENVUELVE EN ENTORNOS VIRTUALES GENERADOS POR LAS TIC', '2024-08-06 09:16:18', '1'),
+(44, 19, 'GESTIONA SU APRENDIZAJE DE MANERA AUTÓNOMA', '2024-08-06 09:16:18', '1'),
+(45, 20, 'Se desenvuelve de manera autónoma a través de su motricidad', '2024-08-06 09:16:18', '1'),
+(46, 20, 'Asume una vida saludable', '2024-08-06 09:16:18', '1'),
+(47, 20, 'Interactúa a través de sus habilidades sociomotrices', '2024-08-06 09:16:18', '1'),
+(48, 21, 'Construye su identidad como persona humana, amada por Dios, digna, libre y trascendente, comprendiendo la doctrina de su propia religión, abierto al diálogo con las que le son cercanas', '2024-08-06 09:16:18', '1'),
+(49, 21, 'Asume la experiencia del encuentro personal y comunitario con Dios en su proyecto de vida en coherencia con su creencia religiosa', '2024-08-06 09:16:18', '1'),
+(50, 22, 'Tutoría', '2024-08-06 09:16:18', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `documento`
 --
 
@@ -274,6 +385,20 @@ INSERT INTO `documento_detalle` (`id`, `matricula_detalle_id`, `documento_id`, `
 (10, 26, 10, 'SI', '10', '2024-08-02 09:09:56', '1'),
 (11, 26, 11, 'NO', '11', '2024-08-02 09:09:56', '1'),
 (12, 26, 12, 'NO', '12', '2024-08-02 09:09:56', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grado_competencia`
+--
+
+CREATE TABLE `grado_competencia` (
+  `id` int(11) NOT NULL,
+  `grado_id` int(11) NOT NULL,
+  `competencia_id` int(11) NOT NULL,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` enum('0','1') DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -619,6 +744,20 @@ ALTER TABLE `apoderado`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `area_curricular`
+--
+ALTER TABLE `area_curricular`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `institucion_nivel_id` (`institucion_nivel_id`);
+
+--
+-- Indices de la tabla `competencia`
+--
+ALTER TABLE `competencia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `area_curricular_id` (`area_curricular_id`);
+
+--
 -- Indices de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -631,6 +770,14 @@ ALTER TABLE `documento_detalle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `matricula_detalle_id` (`matricula_detalle_id`),
   ADD KEY `documento_id` (`documento_id`);
+
+--
+-- Indices de la tabla `grado_competencia`
+--
+ALTER TABLE `grado_competencia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `grado_id` (`grado_id`),
+  ADD KEY `competencia_id` (`competencia_id`);
 
 --
 -- Indices de la tabla `institucion`
@@ -723,6 +870,18 @@ ALTER TABLE `apoderado`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT de la tabla `area_curricular`
+--
+ALTER TABLE `area_curricular`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `competencia`
+--
+ALTER TABLE `competencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -733,6 +892,12 @@ ALTER TABLE `documento`
 --
 ALTER TABLE `documento_detalle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `grado_competencia`
+--
+ALTER TABLE `grado_competencia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion`
@@ -805,11 +970,30 @@ ALTER TABLE `alumno`
   ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`apoderado_id`) REFERENCES `apoderado` (`id`);
 
 --
+-- Filtros para la tabla `area_curricular`
+--
+ALTER TABLE `area_curricular`
+  ADD CONSTRAINT `area_curricular_ibfk_1` FOREIGN KEY (`institucion_nivel_id`) REFERENCES `institucion_nivel` (`id`);
+
+--
+-- Filtros para la tabla `competencia`
+--
+ALTER TABLE `competencia`
+  ADD CONSTRAINT `competencia_ibfk_1` FOREIGN KEY (`area_curricular_id`) REFERENCES `area_curricular` (`id`);
+
+--
 -- Filtros para la tabla `documento_detalle`
 --
 ALTER TABLE `documento_detalle`
   ADD CONSTRAINT `documento_detalle_ibfk_1` FOREIGN KEY (`matricula_detalle_id`) REFERENCES `matricula_detalle` (`id`),
   ADD CONSTRAINT `documento_detalle_ibfk_2` FOREIGN KEY (`documento_id`) REFERENCES `documento` (`id`);
+
+--
+-- Filtros para la tabla `grado_competencia`
+--
+ALTER TABLE `grado_competencia`
+  ADD CONSTRAINT `grado_competencia_ibfk_1` FOREIGN KEY (`grado_id`) REFERENCES `institucion_grado` (`id`),
+  ADD CONSTRAINT `grado_competencia_ibfk_2` FOREIGN KEY (`competencia_id`) REFERENCES `competencia` (`id`);
 
 --
 -- Filtros para la tabla `institucion`
