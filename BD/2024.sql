@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-08-2024 a las 12:08:09
+-- Tiempo de generación: 09-08-2024 a las 08:06:02
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `2024_1`
+-- Base de datos: `2024`
 --
 
 DELIMITER $$
@@ -33,21 +33,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerReporteDinamico` (IN `p_id` 
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
     -- Inicializa la consulta SQL base
-    SET @sql = 'SELECT 
-            md.id,
-            ins.nombre AS institucion_nombre,
-            ins.telefono AS institucion_telefono,
-            ins.correo AS institucion_correo,
-            ins.direccion AS institucion_direccion,
-            il.nombre AS institucion_lectivo,
-            niv.nombre AS institucion_nivel, 
-            ig.nombre AS institucion_grado,
-            mr.nombre AS matricula_razon,
-            a.id AS apoderado_id,
-            a.nombreyapellido AS apoderado_nombre, 
-            a.telefono AS apoderado_telefono,
-            al.id AS alumno_id,
-            al.nombreyapellido AS alumno_nombre';
+    SET @sql = 'SELECT \r\n            md.id,\r\n            ins.nombre AS institucion_nombre,\r\n            ins.telefono AS institucion_telefono,\r\n            ins.correo AS institucion_correo,\r\n            ins.direccion AS institucion_direccion,\r\n            il.nombre AS institucion_lectivo,\r\n            niv.nombre AS institucion_nivel, \r\n            ig.nombre AS institucion_grado,\r\n            mr.nombre AS matricula_razon,\r\n            a.id AS apoderado_id,\r\n            a.nombreyapellido AS apoderado_nombre, \r\n            a.telefono AS apoderado_telefono,\r\n            al.id AS alumno_id,\r\n            al.nombreyapellido AS alumno_nombre';
 
     -- Abre el cursor para recorrer los nombres de los documentos
     OPEN documentosCursor;
@@ -61,8 +47,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerReporteDinamico` (IN `p_id` 
 
         -- Añade al SQL dinámico las columnas correspondientes a cada documento
         SET @sql = CONCAT(@sql, 
-            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.entregado ELSE ''NO'' END) AS `', documentoNombre, '`,
-            MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.observaciones ELSE \'\' END) AS `', documentoNombre, '_observaciones`'
+            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.entregado ELSE ''NO'' END) AS `', documentoNombre, '`,\r\n            MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.observaciones ELSE '''' END) AS `', documentoNombre, '_observaciones`'
         );
     END LOOP;
 
@@ -70,36 +55,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerReporteDinamico` (IN `p_id` 
     CLOSE documentosCursor;
 
     -- Completa el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
-    SET @sql = CONCAT(@sql, '
-        FROM 
-            matricula_detalle md
-        JOIN 
-            matricula m ON md.matricula_id = m.id
-        JOIN 
-            institucion_grado ig ON m.institucion_grado_id = ig.id
-        JOIN 
-            institucion_nivel niv ON ig.institucion_nivel_id = niv.id
-        JOIN 
-            institucion_lectivo il ON niv.institucion_lectivo_id = il.id
-        JOIN 
-            institucion ins ON il.institucion_id = ins.id
-        JOIN 
-            matricula_razon mr ON md.matricula_razon_id = mr.id
-        JOIN 
-            apoderado a ON md.apoderado_id = a.id
-        JOIN 
-            alumno al ON md.alumno_id = al.id
-        LEFT JOIN 
-            documento_detalle dd ON md.id = dd.matricula_detalle_id
-        LEFT JOIN 
-            documento d ON dd.documento_id = d.id
-        WHERE
-            md.id = ', p_id, '
-        GROUP BY 
-            md.id, ins.nombre, ins.telefono, ins.correo, ins.direccion, niv.nombre, ig.nombre, mr.nombre, a.id, a.nombreyapellido, a.telefono, al.id, al.nombreyapellido
-        ORDER BY 
-            ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, al.nombreyapellido ASC
-    ');
+    SET @sql = CONCAT(@sql, '\r\n        FROM \r\n            matricula_detalle md\r\n        JOIN \r\n            matricula m ON md.matricula_id = m.id\r\n        JOIN \r\n            institucion_grado ig ON m.institucion_grado_id = ig.id\r\n        JOIN \r\n            institucion_nivel niv ON ig.institucion_nivel_id = niv.id\r\n        JOIN \r\n            institucion_lectivo il ON niv.institucion_lectivo_id = il.id\r\n        JOIN \r\n            institucion ins ON il.institucion_id = ins.id\r\n        JOIN \r\n            matricula_razon mr ON md.matricula_razon_id = mr.id\r\n        JOIN \r\n            apoderado a ON md.apoderado_id = a.id\r\n        JOIN \r\n            alumno al ON md.alumno_id = al.id\r\n        LEFT JOIN \r\n            documento_detalle dd ON md.id = dd.matricula_detalle_id\r\n        LEFT JOIN \r\n            documento d ON dd.documento_id = d.id\r\n        WHERE\r\n            md.id = ', p_id, '\r\n        GROUP BY \r\n            md.id, ins.nombre, ins.telefono, ins.correo, ins.direccion, niv.nombre, ig.nombre, mr.nombre, a.id, a.nombreyapellido, a.telefono, al.id, al.nombreyapellido\r\n        ORDER BY \r\n            ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, al.nombreyapellido ASC\r\n    ');
 
     -- Prepara y ejecuta la declaración SQL dinámica
     PREPARE stmt FROM @sql;
@@ -373,18 +329,18 @@ CREATE TABLE `documento_detalle` (
 --
 
 INSERT INTO `documento_detalle` (`id`, `matricula_detalle_id`, `documento_id`, `entregado`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 26, 1, 'SI', '1', '2024-08-02 09:09:56', '1'),
-(2, 26, 2, 'SI', '2', '2024-08-02 09:09:56', '1'),
-(3, 26, 3, 'NO', '3', '2024-08-02 09:09:56', '1'),
-(4, 26, 4, 'NO', '4', '2024-08-02 09:09:56', '1'),
-(5, 26, 5, 'SI', '5', '2024-08-02 09:09:56', '1'),
-(6, 26, 6, 'SI', '6', '2024-08-02 09:09:56', '1'),
-(7, 26, 7, 'NO', '7', '2024-08-02 09:09:56', '1'),
-(8, 26, 8, 'NO', '8', '2024-08-02 09:09:56', '1'),
-(9, 26, 9, 'SI', '9', '2024-08-02 09:09:56', '1'),
-(10, 26, 10, 'SI', '10', '2024-08-02 09:09:56', '1'),
-(11, 26, 11, 'NO', '11', '2024-08-02 09:09:56', '1'),
-(12, 26, 12, 'NO', '12', '2024-08-02 09:09:56', '1');
+(1, 26, 1, 'SI', '', '2024-08-02 09:09:56', '1'),
+(2, 26, 2, 'SI', '', '2024-08-02 09:09:56', '1'),
+(3, 26, 3, 'NO', '', '2024-08-02 09:09:56', '1'),
+(4, 26, 4, 'NO', '', '2024-08-02 09:09:56', '1'),
+(5, 26, 5, 'SI', '', '2024-08-02 09:09:56', '1'),
+(6, 26, 6, 'SI', '', '2024-08-02 09:09:56', '1'),
+(7, 26, 7, 'NO', '', '2024-08-02 09:09:56', '1'),
+(8, 26, 8, 'NO', '', '2024-08-02 09:09:56', '1'),
+(9, 26, 9, 'SI', '', '2024-08-02 09:09:56', '1'),
+(10, 26, 10, 'SI', '', '2024-08-02 09:09:56', '1'),
+(11, 26, 11, 'NO', '', '2024-08-02 09:09:56', '1'),
+(12, 26, 12, 'NO', '', '2024-08-02 09:09:56', '1');
 
 -- --------------------------------------------------------
 
