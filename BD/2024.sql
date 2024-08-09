@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2024 a las 08:06:02
+-- Tiempo de generación: 09-08-2024 a las 08:49:01
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -669,16 +669,16 @@ CREATE TABLE `trabajador` (
 INSERT INTO `trabajador` (`id`, `usuario`, `contraseña`, `dni`, `nombre_apellido`, `nacimiento`, `sexo`, `estado_civil`, `cargo`, `direccion`, `telefono`, `correo`, `sueldo`, `cuenta_bcp`, `interbancario_bcp`, `sunat_ruc`, `sunat_usuario`, `sunat_contraseña`, `observaciones`, `usuariocrea`, `fechacreado`, `estado`) VALUES
 (1, '10509059', '10509059', '10509059', 'CECILIA ROSARIO MANRIQUE LOPEZ', '1977-01-16', 'FEMENINO', 'CASADO', 'DIRECTOR', 'PROLONG. LAS GLADIOLAS MZ.X LT.12 EL ERMITAÑO', '976300448', 'tequirosario@hotmail.com', '0.00', '', '', '', '', '', '', '', '2024-07-24 04:59:19', '1'),
 (2, '73937543', '73937543', '73937543', 'MARCO ANTONIO MANRIQUE VARILLAS', '1999-06-18', 'MASCULINO', 'SOLTERO', 'SECRETARIO', 'PROLONG. LAS GLADIOLAS MZ.X LT.12 EL ERMITAÑO', '994947452', 'mmanriquevarillas99@gmail.com', '0.00', '19101118530027', '00219110111853002750', '', '', '', '', '', '2024-07-24 05:00:41', '1'),
-(3, '72302961', '72302961', '72302961', 'DINA ANTONIA MIRANDA BARRIENTOS', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:01:03', '1'),
+(3, '72302961', '72302961', '72302961', 'DINA ANTONIA MIRANDA BARRIENTOS', '2000-06-25', 'FEMENINO', 'SOLTERO', 'PROFESOR', 'AA.HH 27 DE MARZO MZ.E LT.17', '951154745', 'dinamiranda0626@gmail.com', '0.00', '19397996786049', '', '', '', '', '', '', '2024-07-24 05:01:03', '1'),
 (4, '73937540', '73937540', '73937540', 'DIALHU BETSABE FALLA MANRIQUE', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:02:04', '1'),
-(5, '74641478', '74641478', '74641478', 'DARIANA GERALDINE POEMAPE JARA', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:02:33', '1'),
-(6, '80228585', '80228585', '80228585', 'NORMA MOLINA CHIRCCA', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:02:52', '1'),
-(7, '10157297', '10157297', '10157297', 'MARIA DEL PILAR MANRIQUE LOPEZ', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:03:10', '1'),
-(8, '00474406', '00474406', '00474406', 'RONELL ALBERTO MALPICA', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:03:30', '1'),
-(9, '76326172', '76326172', '76326172', 'DAVID RUBENS ABERGA RODRIGUEZ', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:03:52', '1'),
+(5, '74641478', '74641478', '74641478', 'DARIANA GERALDINE POEMAPE JARA', '2001-04-28', 'FEMENINO', 'SOLTERO', 'PROFESOR', 'Jr. 2 de mayo 623', '954241626', 'dari.geral10@gmail.com', '0.00', '19196189117022', '', '', '', '', '', '', '2024-07-24 05:02:33', '1'),
+(6, '80228585', '80228585', '80228585', 'NORMA MOLINA CHIRCCA', '1979-08-24', 'FEMENINO', 'SOLTERO', 'PROFESOR', 'AA. HH. San camilo Mz 1A Lt G Independencia', '995935692', 'normis.25.5@gmail.com', '0.00', '19178028579044', '', '', '', '', '', '', '2024-07-24 05:02:52', '1'),
+(7, '10157297', '10157297', '10157297', 'MARIA DEL PILAR MANRIQUE LOPEZ', '1975-12-05', 'FEMENINO', 'CASADO', 'PROFESOR', 'Celle las Rosas 163, Ermitaño', '959760564', 'andemariap@hotmail.com', '0.00', '19101535516025', '', '', '', '', '', '', '2024-07-24 05:03:10', '1'),
+(8, '00474406', '00474406', '00474406', 'RONELL ALBERTO MALPICA', '1967-05-06', 'MASCULINO', 'SOLTERO', 'PROFESOR', 'JR níspero 265', '927353307', 'ronellmalpica2@gmail.com', '0.00', '19100061031047', '', '', '', '', '', '', '2024-07-24 05:03:30', '1'),
+(9, '76326172', '76326172', '76326172', 'DAVID RUBENS ABERGA RODRIGUEZ', '1999-05-20', 'MASCULINO', 'SOLTERO', 'PROFESOR', 'Independencia Psj. Los Rosales #137', '930669726', 'dvdar99@gmail.com', '0.00', '19493987723091', '', '', '', '', '', '', '2024-07-24 05:03:52', '1'),
 (10, '73948185', '73948185', '73948185', 'HERMILINDA AUCCAPIÑA MARQUEZ', '0000-00-00', '', '', 'AUXILIAR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:04:17', '1'),
-(11, '70817870', '70817870', '70817870', 'LIMAS MORALES ABBNER SAMUEL', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:04:41', '1'),
-(12, '46673942', '46673942', '46673942', 'SOSA HUAMANÑAHUI KRSNA', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:05:10', '1'),
+(11, '70817870', '70817870', '70817870', 'LIMAS MORALES ABBNER SAMUEL', '1995-08-18', 'MASCULINO', 'SOLTERO', 'PROFESOR', 'Jr Sucre Comité 6  peralvillo mz C Lt2', '980753698', 'Samuellimasmorales@gmail.com', '0.00', '19173328528018', '', '', '', '', '', '', '2024-07-24 05:04:41', '1'),
+(12, '46673942', '46673942', '46673942', 'SOSA HUAMANÑAHUI KRSNA', '1990-12-25', 'FEMENINO', 'SOLTERO', 'PROFESOR', 'Prolongación las gladiolas mz.m lt.12', '936207966', 'krsnasosah@gmail.com', '0.00', '19102208603011', '', '', '', '', '', '', '2024-07-24 05:05:10', '1'),
 (13, '76638331', '76638331', '76638331', 'AMY DANIELA CHIRCCA MANRIQUE', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:05:27', '1'),
 (14, '74219683', '74219683', '74219683', 'KHRYSE ATENAS AYESTA MANRIQUE', '0000-00-00', '', '', 'PROFESOR', '', '', '', '0.00', '', '', '', '', '', '', '', '2024-07-24 05:05:44', '1');
 
