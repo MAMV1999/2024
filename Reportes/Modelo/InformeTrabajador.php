@@ -20,7 +20,7 @@ class Trabajador
                     sexo,
                     estado_civil,
                     cargo,
-                    direccion,
+                    UPPER(direccion) AS direccion,
                     telefono,
                     UPPER(correo) AS correo,
                     sueldo,
