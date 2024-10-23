@@ -20,6 +20,7 @@ if (!isset($_SESSION['nombre'])) {
                     <tr>
                         <th>DNI</th>
                         <th>NOMBRE Y APELLIDO</th>
+                        <th>CARGO</th>
                         <th>INFORMACION</th>
                         <th>OPCIONES</th>
                     </tr>

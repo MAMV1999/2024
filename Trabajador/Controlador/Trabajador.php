@@ -58,7 +58,8 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => $reg->dni,
                 "1" => $reg->nombre_apellido,
-                "2" =>
+                "2" => $reg->cargo,
+                "3" =>
                 '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->dni . '">REPORTE PDF</button>
                 
                     <div class="modal fade" id="' . $reg->dni . '" tabindex="-1" aria-labelledby="' . $reg->dni . '" aria-hidden="true">
@@ -77,7 +78,7 @@ switch ($_GET["op"]) {
                             </div>
                         </div>
                         </div>',
-                "3" => ($reg->estado) ? '
+                "4" => ($reg->estado) ? '
                 <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button>
                 <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>
                 ' : '
