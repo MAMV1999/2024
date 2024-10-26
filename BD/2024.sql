@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-10-2024 a las 06:06:59
+-- Tiempo de generación: 26-10-2024 a las 07:25:59
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -483,7 +483,7 @@ INSERT INTO `matricula` (`id`, `detalle`, `institucion_grado_id`, `trabajador_id
 (6, '', 6, 7, '240.00', '300.00', '25.00', 18, '', '2024-07-24 06:08:06', 2, '1'),
 (7, '', 7, 12, '240.00', '300.00', '25.00', 18, '', '2024-07-24 06:08:59', 2, '1'),
 (8, '', 8, 8, '240.00', '300.00', '25.00', 18, '', '2024-07-24 06:09:54', 2, '1'),
-(9, '', 9, 9, '240.00', '300.00', '25.00', 25, '', '2024-07-24 06:10:46', 2, '1');
+(9, '', 9, 9, '240.00', '300.00', '25.00', 18, '', '2024-07-24 06:10:46', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -853,7 +853,7 @@ ALTER TABLE `documento_detalle`
 -- AUTO_INCREMENT de la tabla `grado_competencia`
 --
 ALTER TABLE `grado_competencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion`

@@ -19,11 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                     <thead>
                         <tr>
                             <th>LECTIVO</th>
-                            <th>NIVEL</th>
-                            <th>ÁREA CURRICULAR</th>
-                            <th>GRADO</th>
                             <th>COMPETENCIA</th>
-                            <th>FECHA CREADO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

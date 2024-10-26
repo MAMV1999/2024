@@ -13,7 +13,7 @@ function init() {
 }
 
 function cargar_grados(selectElement = null) {
-    $.post(link + "listar_grados_activos", function (r) {
+    $.post(link + "listar_grados_disponibles", function (r) {
         if (selectElement) {
             $(selectElement).html(r);
             $(selectElement).selectpicker("refresh");
@@ -28,7 +28,7 @@ function cargar_grados(selectElement = null) {
 }
 
 function cargar_competencias(selectElement = null) {
-    $.post(link + "listar_competencias_activas", function (r) {
+    $.post(link + "listar_competencias_disponibles", function (r) {
         if (selectElement) {
             $(selectElement).html(r);
             $(selectElement).selectpicker("refresh");

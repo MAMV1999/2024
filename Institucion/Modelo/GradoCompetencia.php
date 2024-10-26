@@ -7,12 +7,20 @@ class GradoCompetencia
     {
     }
 
-    // Método para guardar una nueva relación grado-competencia
-    public function guardar($grado_id, $competencia_id)
+    // Método para guardar múltiples relaciones grado-competencia
+    public function guardarMultiple($datos)
     {
-        $sql = "INSERT INTO grado_competencia (grado_id, competencia_id, estado) 
-                VALUES ('$grado_id', '$competencia_id', '1')";
-        return ejecutarConsulta($sql);
+        foreach ($datos as $dato) {
+            $grado_id = $dato['grado_id'];
+            $competencia_id = $dato['competencia_id'];
+            $sql = "INSERT INTO grado_competencia (grado_id, competencia_id, estado) 
+                    VALUES ('$grado_id', '$competencia_id', '1')";
+            $resultado = ejecutarConsulta($sql);
+            if (!$resultado) {
+                return "Error en la consulta: " . $GLOBALS['conectar']->error; // Si alguna inserción falla, devuelve el error
+            }
+        }
+        return true; // Si todas las inserciones son exitosas, retorna verdadero
     }
 
     // Método para editar una relación grado-competencia existente
@@ -67,8 +75,8 @@ class GradoCompetencia
         return ejecutarConsulta($sql);
     }
 
-    // Método para listar los grados activos
-    public function listarGradosActivos()
+    // Nuevo método para listar grados disponibles (no registrados en grado_competencia)
+    public function listarGradosDisponibles()
     {
         $sql = "SELECT ig.id, CONCAT(il.nombre, ' - ', iniv.nombre, ' - ', ig.nombre) AS nombre
                 FROM institucion_grado ig
@@ -78,15 +86,16 @@ class GradoCompetencia
         return ejecutarConsulta($sql);
     }
 
-    // Método para listar las competencias activas
-    public function listarCompetenciasActivas()
+    // Nuevo método para listar competencias disponibles (no registradas en grado_competencia)
+    public function listarCompetenciasDisponibles()
     {
         $sql = "SELECT c.id, CONCAT(il.nombre, ' - ', iniv.nombre, ' - ', ac.nombre, ' - ', c.nombre) AS nombre
                 FROM competencia c
                 LEFT JOIN area_curricular ac ON c.area_curricular_id = ac.id
                 LEFT JOIN institucion_nivel iniv ON ac.institucion_nivel_id = iniv.id
                 LEFT JOIN institucion_lectivo il ON iniv.institucion_lectivo_id = il.id
-                WHERE c.estado='1'";
+                WHERE c.estado='1' 
+                AND c.id NOT IN (SELECT competencia_id FROM grado_competencia)";
         return ejecutarConsulta($sql);
     }
 }
