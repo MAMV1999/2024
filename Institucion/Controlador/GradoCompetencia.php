@@ -54,29 +54,30 @@ switch ($_GET["op"]) {
         echo json_encode($rspta);
         break;
 
-    case 'listar':
-        $rspta = $gradoCompetencia->listar();
-        // Vamos a declarar un array
-        $data = Array();
-
-        while ($reg = $rspta->fetch_object()) {
-            $data[] = array(
-                "0" => $reg->institucion_lectivo.' / '.$reg->institucion_nivel.' / '.$reg->grado.' - '.$reg->area_curricular,
-                "1" => $reg->competencia,
-                "2" => ($reg->estado) ?
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
-                    :
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
+        case 'listar':
+            $rspta = $gradoCompetencia->listar();
+            $data = Array();
+    
+            while ($reg = $rspta->fetch_object()) {
+                $competencia = (strlen($reg->competencia) > 60) ? substr($reg->competencia, 0, 60) . "..." : $reg->competencia;
+                
+                $data[] = array(
+                    "0" => $reg->institucion_lectivo . ' / ' . $reg->institucion_nivel . ' / ' . $reg->grado . ' - ' . $reg->area_curricular,
+                    "1" => $competencia,
+                    "2" => ($reg->estado) ?
+                        '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
+                        :
+                        '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
+                );
+            }
+            $results = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
             );
-        }
-        $results = array(
-            "sEcho" => 1, // Información para el datatables
-            "iTotalRecords" => count($data), // Enviamos el total de registros al datatable
-            "iTotalDisplayRecords" => count($data), // Enviamos el total de registros a visualizar
-            "aaData" => $data
-        );
-        echo json_encode($results);
-        break;
+            echo json_encode($results);
+            break;
 
     case 'listar_grados_activos':
         $rspta = $gradoCompetencia->listarGradosActivos();
