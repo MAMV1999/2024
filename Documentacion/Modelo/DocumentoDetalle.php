@@ -62,8 +62,7 @@ class DocumentoDetalle
                 $sql = "UPDATE documento_detalle SET entregado='$entregado', observaciones='$observaciones' WHERE matricula_detalle_id='$matricula_detalle_id' AND documento_id='$documento_id'";
             } else {
                 // Insertar un nuevo registro
-                $sql = "INSERT INTO documento_detalle (matricula_detalle_id, documento_id, entregado, observaciones)
-                        VALUES ('$matricula_detalle_id', '$documento_id', '$entregado', '$observaciones')";
+                $sql = "INSERT INTO documento_detalle (matricula_detalle_id, documento_id, entregado, observaciones) VALUES ('$matricula_detalle_id', '$documento_id', '$entregado', '$observaciones')";
             }
             ejecutarConsulta($sql);
         }

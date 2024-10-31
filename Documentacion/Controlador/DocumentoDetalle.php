@@ -14,7 +14,7 @@ switch ($_GET["op"]) {
                 "alumno" => $reg->alumno,
                 "apoderado" => $reg->apoderado,
                 "info" => '<!-- Button trigger modal -->
-                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">PDF</button>
+                            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">REPORTE</button>
                             
                             <!-- Modal -->
                             <div class="modal fade" id="' . $reg->id . '" tabindex="-1" aria-labelledby="' . $reg->id . 'Label" aria-hidden="true">
