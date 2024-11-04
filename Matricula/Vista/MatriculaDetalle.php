@@ -46,7 +46,10 @@ if (!isset($_SESSION['nombre'])) {
                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">APODERADO</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">PAGO</button>
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">MATRICULA</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="mensualidad-tab" data-bs-toggle="tab" data-bs-target="#mensualidad-tab-pane" type="button" role="tab" aria-controls="mensualidad-tab-pane" aria-selected="false">MENSUALIDAD</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="otros-tab" data-bs-toggle="tab" data-bs-target="#otros-tab-pane" type="button" role="tab" aria-controls="otros-tab-pane" aria-selected="false">OTROS</button>
@@ -61,7 +64,6 @@ if (!isset($_SESSION['nombre'])) {
                                     <select id="matricula_razon_id" name="matricula_razon_id" class="form-control selectpicker" data-live-search="true"></select>
                                 </div>
                             </div>
-
 
                             <div class="p-3">
                                 <label for="alumno_dni" class="form-label"><b>DATOS PERSONALES ALUMNO:</b></label>
@@ -153,6 +155,27 @@ if (!isset($_SESSION['nombre'])) {
                                 <label for="pago_observaciones" class="form-label"><b>OBSERVACIONES PAGO:</b></label>
                                 <div class="input-group">
                                     <input type="text" id="pago_observaciones" name="pago_observaciones" placeholder="Observaciones Pago" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Nueva Pestaña Mensualidad -->
+                        <div class="tab-pane fade" id="mensualidad-tab-pane" role="tabpanel" aria-labelledby="mensualidad-tab" tabindex="0">
+                            <div class="p-3">
+                                <label for="mensualidad_monto" class="form-label"><b>MONTO MENSUALIDAD:</b></label>
+                                <div class="input-group">
+                                    <input type="text" id="mensualidad_monto" name="mensualidad_monto" placeholder="Monto Mensualidad" class="form-control">
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <label for="mensualidad_fecha" class="form-label"><b>FECHA MENSUALIDAD:</b></label>
+                                <div class="input-group">
+                                    <input type="date" id="mensualidad_fecha" name="mensualidad_fecha" class="form-control">
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <label for="mensualidad_observaciones" class="form-label"><b>OBSERVACIONES MENSUALIDAD:</b></label>
+                                <div class="input-group">
+                                    <input type="text" id="mensualidad_observaciones" name="mensualidad_observaciones" placeholder="Observaciones Mensualidad" class="form-control">
                                 </div>
                             </div>
                         </div>

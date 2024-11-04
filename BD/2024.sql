@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2024 a las 07:25:59
+-- Tiempo de generación: 02-11-2024 a las 21:15:59
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -356,6 +356,20 @@ CREATE TABLE `grado_competencia` (
   `estado` enum('0','1') DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `grado_competencia`
+--
+
+INSERT INTO `grado_competencia` (`id`, `grado_id`, `competencia_id`, `fechacreado`, `estado`) VALUES
+(1, 1, 2, '2024-10-26 06:31:07', '1'),
+(2, 1, 3, '2024-10-26 06:31:07', '1'),
+(3, 1, 4, '2024-10-26 06:31:07', '1'),
+(4, 1, 5, '2024-10-26 06:31:07', '1'),
+(5, 1, 6, '2024-10-26 07:06:31', '1'),
+(6, 1, 7, '2024-10-26 07:06:31', '1'),
+(7, 1, 8, '2024-10-26 07:06:31', '1'),
+(8, 1, 9, '2024-10-26 07:56:52', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -634,6 +648,36 @@ INSERT INTO `matricula_razon` (`id`, `nombre`, `estado`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensualidad_mes`
+--
+
+CREATE TABLE `mensualidad_mes` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `mensualidad_mes`
+--
+
+INSERT INTO `mensualidad_mes` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'MARZO', '', '2024-11-02 17:30:51', 1),
+(2, 'ABRIL', '', '2024-11-02 17:31:50', 1),
+(3, 'MAYO', '', '2024-11-02 17:34:35', 1),
+(4, 'JUNIO', '', '2024-11-02 17:35:03', 1),
+(5, 'JULIO', '', '2024-11-02 17:35:12', 1),
+(6, 'AGOSTO', '', '2024-11-02 17:35:24', 1),
+(7, 'SEPTIEMBRE', '', '2024-11-02 17:35:41', 1),
+(8, 'OCTUBRE', '', '2024-11-02 17:35:50', 1),
+(9, 'NOVIEMBRE', '', '2024-11-02 17:35:59', 1),
+(10, 'DICIEMBRE', '', '2024-11-02 17:36:13', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `trabajador`
 --
 
@@ -804,6 +848,12 @@ ALTER TABLE `matricula_razon`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `mensualidad_mes`
+--
+ALTER TABLE `mensualidad_mes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `trabajador`
 --
 ALTER TABLE `trabajador`
@@ -853,7 +903,7 @@ ALTER TABLE `documento_detalle`
 -- AUTO_INCREMENT de la tabla `grado_competencia`
 --
 ALTER TABLE `grado_competencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `institucion`
@@ -908,6 +958,12 @@ ALTER TABLE `matricula_pago`
 --
 ALTER TABLE `matricula_razon`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `mensualidad_mes`
+--
+ALTER TABLE `mensualidad_mes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajador`

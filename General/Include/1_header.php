@@ -141,7 +141,7 @@
                             </li>
                             <!-- <li><a class="dropdown-item" href="#">Separated link</a></li> -->
                         </ul>
-                        <a class="btn btn-outline-danger" href="../../Inicio/Controlador/Acceso.php?op=salir" role="button">Cerrar sesión</a>
+                        <a class="btn btn-outline-danger" href="../../Inicio/Controlador/Acceso.php?op=salir" role="button">CERRAR SESIÓN</a>
                     </div>
                 </div>
             </div>

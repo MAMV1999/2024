@@ -55,8 +55,8 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "APODERADO", "link" => "Apoderado.php"),
-                    "2" => array("nombre" => "ALUMNO", "link" => "Alumno.php")
+                    "1" => array("nombre" => "APODERADO(S)", "link" => "Apoderado.php"),
+                    "2" => array("nombre" => "ALUMNO(S)", "link" => "Alumno.php")
                 );
                 ?>
                 <table class="table">
@@ -86,14 +86,83 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>CONFIGURACION</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>CONFIGURACION MATRICULA</b></h5>
             <div class="d-flex text-body-secondary pt-3">
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "CONFIG. MATRICULA", "link" => "Matricula.php"),
-                    "2" => array("nombre" => "RAZON DE MATRICULA", "link" => "MatriculaRazon.php"),
-                    "3" => array("nombre" => "METODOS DE PAGO", "link" => "MatriculaMetodo.php")
+                    "1" => array("nombre" => "CONFIGURACION MATRICULA", "link" => "Matricula.php"),
+                );
+                ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">PAGUINA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $a = 1;
+                        while ($a <= count($array)) {
+                            echo '<tr>
+                                <th scope="row">' . $a . '</th>
+                                <td>' . $array[$a]["nombre"] . '</td>
+                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                            </tr>';
+                            $a++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CUERPO_INICIO -->
+        <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
+            <h5 class="border-bottom pb-2 mb-0"><b>CONFIGURACION MENSUALIDAD</b></h5>
+            <div class="d-flex text-body-secondary pt-3">
+                <br>
+                <?php
+                $array = array(
+                    "1" => array("nombre" => "CONFIGURACION MESES", "link" => "MensualidadMes.php"),
+                );
+                ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">PAGUINA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $a = 1;
+                        while ($a <= count($array)) {
+                            echo '<tr>
+                                <th scope="row">' . $a . '</th>
+                                <td>' . $array[$a]["nombre"] . '</td>
+                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                            </tr>';
+                            $a++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CUERPO_INICIO -->
+        <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
+            <h5 class="border-bottom pb-2 mb-0"><b>CONFIGURACION OTROS</b></h5>
+            <div class="d-flex text-body-secondary pt-3">
+                <br>
+                <?php
+                $array = array(
+                    "1" => array("nombre" => "RAZON DE MATRICULA", "link" => "MatriculaRazon.php"),
+                    "2" => array("nombre" => "METODOS DE PAGO", "link" => "MatriculaMetodo.php")
                 );
                 ?>
                 <table class="table">
